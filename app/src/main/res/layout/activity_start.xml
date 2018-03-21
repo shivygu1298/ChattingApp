@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.shivamgupta.chatapp.StartActivity">
+
+    <include layout="@layout/app_bar_layout"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnLoginCont"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="88dp"
+        android:gravity="center"
+        android:text="Welcome to BhatsApp "
+        android:textColor="#ffffff"
+        android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/btnNewAccount"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="91dp"
+        android:textColor="@color/colorPrimary"
+        android:background="#ffffff"
+        android:padding="10dp"
+        android:text="Need A new Account?" />
+
+    <Button
+        android:id="@+id/btnLoginCont"
+        android:textColor="#ffffff"
+        android:layout_width="220dp"
+        android:padding="10dp"
+        android:background="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnNewAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:text="Already have Account?" />
+
+</RelativeLayout>

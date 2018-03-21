@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="match_parent"
+    tools:context="com.example.shivamgupta.chatapp.AccountSettingsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ivProfileImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:src="@drawable/dp_androidnew" />
+
+    <TextView
+        android:id="@+id/tvDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:layout_centerVertical="true"
+        android:text="Display Name" />
+
+    <TextView
+        android:textColor="#ffffff"
+        android:id="@+id/tvStatus"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDisplayName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:text="Hi there i am using bhatsapp" />
+
+    <Button
+        android:id="@+id/btnChangeImage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvStatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:text="CHANGE IMAGE"
+        android:background="#ffffff"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/btnChangeStaus"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnChangeImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:background="@color/colorAccent"
+        android:text="CHANGE STATUS"
+        android:textColor="#ffffff" />
+
+
+</RelativeLayout>
