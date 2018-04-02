@@ -101,12 +101,17 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("Image" , "default");
                     userMap.put("Thumb_image" , "default");
 
-                    mDataBase.setValue(userMap);
-
-                    mprogressDialog.dismiss();
-                    Intent i = new Intent(RegisterActivity.this , MainActivity.class);
-                    startActivity(i);
-                    finish();
+                    mDataBase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                mprogressDialog.dismiss();
+                                Intent i = new Intent(RegisterActivity.this , MainActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
+                    });
 
                 }else{
                     mprogressDialog.hide();

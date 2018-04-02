@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/btnChangeImage"
-        android:layout_width="150dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvStatus"
         android:layout_centerHorizontal="true"
@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/btnChangeStaus"
-        android:layout_width="150dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnChangeImage"
         android:layout_centerHorizontal="true"
