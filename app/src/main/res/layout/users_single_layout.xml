@@ -20,15 +20,15 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivSingleUserImage"
         android:layout_marginStart="22dp"
-        android:layout_toEndOf="@+id/ivSingleUserImage"
+        android:layout_toEndOf="@id/ivSingleUserImage"
         android:text="Display Name" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvSingleStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivSingleUserImage"
+        android:layout_marginTop="5dp"
         android:layout_alignStart="@+id/tvSingleUserName"
-        android:layout_marginBottom="11dp"
+        android:layout_below="@+id/tvSingleUserName"
         android:text="Default Status" />
 </RelativeLayout>

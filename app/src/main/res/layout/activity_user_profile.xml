@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="com.example.shivamgupta.chatapp.UserProfileActivity">
+
+
+
+    <TextView
+        android:id="@+id/tvUserDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_centerVertical="true"
+        android:text="Display Name" />
+
+    <ImageView
+        android:id="@+id/ivUserProfileImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/dp_androidnew" />
+
+    <TextView
+        android:id="@+id/tvUserStatus"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserDisplayName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Current Status" />
+
+    <TextView
+        android:id="@+id/tvTotalFriends"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="76dp"
+        android:text="Total Friends"/>
+
+    <Button
+        android:id="@+id/btnSendFriRequest"
+        android:layout_width="220dp"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:text="Send Friend Request"
+        android:background="@color/colorAccent"/>
+</RelativeLayout>
