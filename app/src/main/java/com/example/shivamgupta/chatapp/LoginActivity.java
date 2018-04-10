@@ -13,9 +13,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mDialog;
 
+    private DatabaseReference mUserDataBase;
+
     private Toolbar mToolBar;
 
     @Override
@@ -35,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mUserDataBase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         etLogEmail = findViewById(R.id.etLogEmail);
         etLogPasword = findViewById(R.id.etLogPassword);
@@ -75,9 +83,19 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     mDialog.dismiss();
 
-                    Intent i = new Intent(LoginActivity.this , MainActivity.class);
-                    startActivity(i);
-                    finish();
+                    String currentUserId = mAuth.getCurrentUser().getUid();
+                    String device_token = FirebaseInstanceId.getInstance().getToken();
+
+                    mUserDataBase.child(currentUserId).child("device_token").setValue(device_token).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Intent i = new Intent(LoginActivity.this , MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+
                 }else{
                     mDialog.hide();
                     Toast.makeText(LoginActivity.this, "Cannot sign in user", Toast.LENGTH_SHORT).show();

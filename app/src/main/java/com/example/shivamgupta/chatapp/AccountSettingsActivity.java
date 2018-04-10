@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -75,16 +77,28 @@ public class AccountSettingsActivity extends AppCompatActivity {
         String uid = currentUser.getUid();
 
         mDataBase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        mDataBase.keepSynced(true);
 
         mDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("Name").getValue().toString();
                 String status = dataSnapshot.child("Status").getValue().toString();
-                String image = dataSnapshot.child("Image").getValue().toString();
+                final String image = dataSnapshot.child("Image").getValue().toString();
 
                 if (!image.equals("default")) {
-                    Picasso.with(AccountSettingsActivity.this).load(image).placeholder(R.drawable.dp_androidnew).into(ivProfileImage);
+                    Picasso.with(AccountSettingsActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.dp_androidnew).into(ivProfileImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            Picasso.with((AccountSettingsActivity.this)).load(image).placeholder(R.drawable.dp_androidnew).into(ivProfileImage);
+                        }
+                    });
                 }
 
                 tvDisplayName.setText(name);

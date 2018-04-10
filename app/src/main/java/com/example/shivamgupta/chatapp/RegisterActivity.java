@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -91,27 +92,33 @@ public class RegisterActivity extends AppCompatActivity {
 
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = currentUser.getUid();
+                    String device_token = FirebaseInstanceId.getInstance().getToken();
 
                     mDataBase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
-                    HashMap<String , String> userMap = new HashMap<>();
 
-                    userMap.put("Name" , displayName);
-                    userMap.put("Status" , "Hi there i am using Bhatsapp");
-                    userMap.put("Image" , "default");
-                    userMap.put("Thumb_image" , "default");
+                            HashMap<String , String> userMap = new HashMap<>();
 
-                    mDataBase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                mprogressDialog.dismiss();
-                                Intent i = new Intent(RegisterActivity.this , MainActivity.class);
-                                startActivity(i);
-                                finish();
-                            }
-                        }
-                    });
+                            userMap.put("Name" , displayName);
+                            userMap.put("Status" , "Hi there i am using Bhatsapp");
+                            userMap.put("Image" , "default");
+                            userMap.put("Thumb_image" , "default");
+                            userMap.put("device_token" , device_token);
+
+                            mDataBase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        mprogressDialog.dismiss();
+                                        Intent i = new Intent(RegisterActivity.this , MainActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                }
+                            });
+
+
+
 
                 }else{
                     mprogressDialog.hide();
