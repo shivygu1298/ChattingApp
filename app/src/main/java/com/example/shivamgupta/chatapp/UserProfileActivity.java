@@ -285,4 +285,22 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(mCurrentUser != null) {
+            mRootRef.child("Users").child(mCurrentUser.getUid()).child("online").setValue(true);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(mCurrentUser != null) {
+            mRootRef.child("Users").child(mCurrentUser.getUid()).child("online").setValue(false);
+        }
+    }
 }

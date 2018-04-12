@@ -12,6 +12,16 @@
         android:src="@drawable/dp_androidnew"
         android:id="@+id/ivSingleUserImage" />
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignTop="@+id/tvSingleUserName"
+        android:layout_marginStart="16dp"
+        android:id="@+id/ivUserOnline"
+        android:visibility="invisible"
+        android:layout_toEndOf="@+id/tvSingleUserName"
+        android:src="@drawable/green_dot" />
+
     <TextView
         android:id="@+id/tvSingleUserName"
         android:layout_width="wrap_content"

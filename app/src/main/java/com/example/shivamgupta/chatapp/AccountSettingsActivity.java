@@ -240,4 +240,22 @@ public class AccountSettingsActivity extends AppCompatActivity {
         }
         return randomStringBuilder.toString();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(currentUser != null) {
+            mDataBase.child("online").setValue(true);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(currentUser != null) {
+            mDataBase.child("online").setValue(false);
+        }
+    }
 }

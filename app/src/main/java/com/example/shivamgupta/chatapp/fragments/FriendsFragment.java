@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shivamgupta.chatapp.R;
@@ -90,6 +91,11 @@ public class FriendsFragment extends Fragment {
                                 String user_name = dataSnapshot.child("Name").getValue().toString();
                                 String user_image = dataSnapshot.child("Thumb_image").getValue().toString();
 
+                                if(dataSnapshot.hasChild("online")){
+                                    Boolean user_online = (Boolean) dataSnapshot.child("online").getValue();
+                                    viewHolder.setUserOnline(user_online);
+                                }
+                                
                                 viewHolder.setName(user_name);
                                 viewHolder.setImage(user_image , getContext());
                             }
@@ -127,6 +133,16 @@ public class FriendsFragment extends Fragment {
         public void setImage(String image , Context ctx){
             CircleImageView imageView = mView.findViewById(R.id.ivSingleUserImage);
             Picasso.with(ctx).load(image).placeholder(R.drawable.dp_androidnew).into(imageView);
+        }
+        public void setUserOnline(Boolean userOnline){
+
+            ImageView user_online_image = mView.findViewById(R.id.ivUserOnline);
+
+            if(userOnline){
+                user_online_image.setVisibility(View.VISIBLE);
+            }else{
+                user_online_image.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

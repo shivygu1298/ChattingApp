@@ -24,6 +24,8 @@ public class StatusUpdateActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
     private DatabaseReference mDataBase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
     private Toolbar mToolBar;
 
@@ -48,6 +50,8 @@ public class StatusUpdateActivity extends AppCompatActivity {
         String uid = currentUser.getUid();
 
         mDataBase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         //Tool Bar
         mToolBar = findViewById(R.id.main_app_bar);
@@ -81,5 +85,23 @@ public class StatusUpdateActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(currentUser != null) {
+            mDataBase.child("online").setValue(true);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(currentUser != null) {
+            mDataBase.child("online").setValue(false);
+        }
     }
 }
