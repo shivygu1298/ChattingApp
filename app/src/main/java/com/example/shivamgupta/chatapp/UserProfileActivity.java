@@ -281,10 +281,7 @@ public class UserProfileActivity extends AppCompatActivity {
                             mSendFriendRequestBtn.setEnabled(true);
                         }
                     });
-
-
                 }
-
             }
         });
     }
