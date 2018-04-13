@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#b4b0b0"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shivamgupta.chatapp.ChatActivity">
+
+    <include
+        android:id="@+id/app_bar_chat"
+        layout="@layout/app_bar_layout"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:id="@+id/ivAdd"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:id="@+id/tvChatArea"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Text View" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:id="@+id/ivSend"
+            android:layout_height="match_parent"
+            android:src="@drawable/send_icon" />
+    </LinearLayout>
+</RelativeLayout>

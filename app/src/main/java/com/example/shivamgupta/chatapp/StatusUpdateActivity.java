@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class StatusUpdateActivity extends AppCompatActivity {
 
@@ -92,7 +93,7 @@ public class StatusUpdateActivity extends AppCompatActivity {
         super.onStart();
 
         if(currentUser != null) {
-            mDataBase.child("online").setValue(true);
+            mDataBase.child("online").setValue("true");
         }
     }
 
@@ -101,7 +102,7 @@ public class StatusUpdateActivity extends AppCompatActivity {
         super.onStop();
 
         if(currentUser != null) {
-            mDataBase.child("online").setValue(false);
+            mDataBase.child("online").setValue(ServerValue.TIMESTAMP);
         }
     }
 }

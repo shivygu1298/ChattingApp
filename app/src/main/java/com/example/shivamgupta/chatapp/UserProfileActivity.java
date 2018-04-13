@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -291,7 +292,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onStart();
 
         if(mCurrentUser != null) {
-            mRootRef.child("Users").child(mCurrentUser.getUid()).child("online").setValue(true);
+            mDatabaseRef.child("online").setValue("true");
         }
     }
 
@@ -300,7 +301,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onStop();
 
         if(mCurrentUser != null) {
-            mRootRef.child("Users").child(mCurrentUser.getUid()).child("online").setValue(false);
+            mDatabaseRef.child("online").setValue(ServerValue.TIMESTAMP);
         }
     }
 }

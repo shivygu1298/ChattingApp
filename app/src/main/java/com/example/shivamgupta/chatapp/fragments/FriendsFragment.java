@@ -1,7 +1,9 @@
 package com.example.shivamgupta.chatapp.fragments;
 
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shivamgupta.chatapp.ChatActivity;
 import com.example.shivamgupta.chatapp.R;
+import com.example.shivamgupta.chatapp.UserProfileActivity;
 import com.example.shivamgupta.chatapp.models.Friends;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,20 +88,49 @@ public class FriendsFragment extends Fragment {
                     protected void populateViewHolder(final FriendsViewHolder viewHolder, Friends model, int position) {
                         viewHolder.setDate(model.getDate());
 
-                        String user_list_id = getRef(position).getKey();
+                        final String user_list_id = getRef(position).getKey();
                         mUserDatabase.child(user_list_id).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                String user_name = dataSnapshot.child("Name").getValue().toString();
+                                final String user_name = dataSnapshot.child("Name").getValue().toString();
                                 String user_image = dataSnapshot.child("Thumb_image").getValue().toString();
 
                                 if(dataSnapshot.hasChild("online")){
-                                    Boolean user_online = (Boolean) dataSnapshot.child("online").getValue();
+                                    String user_online = dataSnapshot.child("online").getValue().toString();
                                     viewHolder.setUserOnline(user_online);
                                 }
                                 
                                 viewHolder.setName(user_name);
                                 viewHolder.setImage(user_image , getContext());
+
+                                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        CharSequence options[] = new CharSequence[] {"open profile" , "open chat"};
+
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                                        builder.setTitle("Select An Option");
+                                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                if(i == 0){
+                                                    Intent j = new Intent(getContext() , UserProfileActivity.class);
+                                                    j.putExtra("user_id" , user_list_id);
+                                                    startActivity(j);
+                                                }
+                                                if(i == 1){
+                                                    Intent j = new Intent(getContext() , ChatActivity.class);
+                                                    j.putExtra("user_id" , user_list_id);
+                                                    j.putExtra("user_name" , user_name);
+                                                    startActivity(j);
+                                                }
+                                            }
+                                        });
+                                        builder.show();
+                                    }
+                                });
                             }
 
                             @Override
@@ -134,11 +167,11 @@ public class FriendsFragment extends Fragment {
             CircleImageView imageView = mView.findViewById(R.id.ivSingleUserImage);
             Picasso.with(ctx).load(image).placeholder(R.drawable.dp_androidnew).into(imageView);
         }
-        public void setUserOnline(Boolean userOnline){
+        public void setUserOnline(String userOnline){
 
             ImageView user_online_image = mView.findViewById(R.id.ivUserOnline);
 
-            if(userOnline){
+            if(userOnline.equals("true")){
                 user_online_image.setVisibility(View.VISIBLE);
             }else{
                 user_online_image.setVisibility(View.INVISIBLE);

@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -246,7 +247,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onStart();
 
         if(currentUser != null) {
-            mDataBase.child("online").setValue(true);
+            mDataBase.child("online").setValue("true");
         }
     }
 
@@ -255,7 +256,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onStop();
 
         if(currentUser != null) {
-            mDataBase.child("online").setValue(false);
+            mDataBase.child("online").setValue(ServerValue.TIMESTAMP);
         }
     }
 }
