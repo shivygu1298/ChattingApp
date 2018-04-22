@@ -35,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
@@ -47,6 +46,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private DatabaseReference mDataBase;
     private StorageReference mStorageRef;
+    private FirebaseAuth mAuth;
 
     TextView tvDisplayName;
     TextView tvStatus;
@@ -62,6 +62,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
+
+        mAuth = FirebaseAuth.getInstance();
 
         tvDisplayName = findViewById(R.id.tvDisplayName);
         tvStatus = findViewById(R.id.tvStatus);
@@ -230,23 +232,13 @@ public class AccountSettingsActivity extends AppCompatActivity {
         }
     }
 
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(10);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
 
-        if(currentUser != null) {
+        FirebaseUser currentUsers = mAuth.getCurrentUser();
+
+        if(currentUsers != null) {
             mDataBase.child("online").setValue("true");
         }
     }
@@ -254,8 +246,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        FirebaseUser currentUsers = mAuth.getCurrentUser();
 
-        if(currentUser != null) {
+        if(currentUsers != null) {
             mDataBase.child("online").setValue(ServerValue.TIMESTAMP);
         }
     }
